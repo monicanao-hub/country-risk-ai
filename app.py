@@ -71,3 +71,32 @@ chart_data = pd.DataFrame({
 })
 
 st.bar_chart(chart_data.set_index("Indicator"))
+
+st.subheader("🌍 Country Risk Analysis")
+
+countries = pd.DataFrame({
+"Country":["Chile","Peru","Brazil","Argentina","Mexico","Colombia"],
+"inflation":[4,3,6,140,7,9],
+"debt":[38,33,80,90,60,65],
+"gdp_growth":[2.5,2.8,1,-1,2,1.5],
+"unemployment":[8,6,9,7,4,10]
+})
+
+predictions = model.predict(countries[["inflation","debt","gdp_growth","unemployment"]])
+
+countries["Risk Level"] = [risk_levels[p] for p in predictions]
+
+st.dataframe(countries)
+
+st.subheader("🏆 Countries Ranked by Risk")
+
+risk_order = {"Low Risk":1,"Medium Risk":2,"High Risk":3}
+countries["Risk Score"] = countries["Risk Level"].map(risk_order)
+
+ranking = countries.sort_values("Risk Score")
+
+st.table(ranking[["Country","Risk Level"]])
+
+st.subheader("📊 Economic Dashboard")
+
+st.bar_chart(countries.set_index("Country")[["inflation","debt"]])
