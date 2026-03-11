@@ -134,3 +134,18 @@ fig2 = px.bar(
 )
 
 st.plotly_chart(fig2)
+
+st.subheader("🤖 How the AI Model Works")
+
+st.write("""
+This platform uses a Machine Learning model called **Random Forest Classifier**.
+
+The model analyzes macroeconomic indicators such as:
+
+• Inflation rate  
+• Public debt (% of GDP)  
+• GDP growth  
+• Unemployment rate  
+
+Based on patterns learned from economic data, the algorithm predicts the **country investment risk level**.
+""")
