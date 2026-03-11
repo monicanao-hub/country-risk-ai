@@ -60,4 +60,14 @@ predictions = model.predict(countries[["inflation","debt","gdp_growth","unemploy
 
 countries["Risk"] = [risk_levels[p] for p in predictions]
 
+
 st.dataframe(countries)
+
+st.subheader("Economic Indicators Visualization")
+
+chart_data = pd.DataFrame({
+"Indicator":["Inflation","Debt","GDP Growth","Unemployment"],
+"Value":[inflation,debt,gdp,unemployment]
+})
+
+st.bar_chart(chart_data.set_index("Indicator"))
