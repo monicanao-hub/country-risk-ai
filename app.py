@@ -47,15 +47,6 @@ st.write("Low Risk → Stable macroeconomic conditions")
 st.write("Medium Risk → Moderate economic uncertainty")
 st.write("High Risk → High macroeconomic instability")
 
-st.subheader("Economic Indicators Visualization")
-
-chart_data = pd.DataFrame({
-"Indicator":["Inflation","Debt","GDP Growth","Unemployment"],
-"Value":[inflation,debt,gdp,unemployment]
-})
-
-st.bar_chart(chart_data.set_index("Indicator"))
-
 st.subheader("🌍 Country Risk Analysis")
 
 countries = pd.DataFrame({
@@ -119,4 +110,5 @@ The model analyzes macroeconomic indicators such as:
 
 Based on patterns learned from economic data, the algorithm predicts the **country investment risk level**.
 """)
+
 
