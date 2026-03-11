@@ -122,3 +122,15 @@ fig = px.choropleth(
 )
 
 st.plotly_chart(fig)
+
+st.subheader("📈 Economic Indicators Comparison")
+
+fig2 = px.bar(
+    countries,
+    x="Country",
+    y=["inflation","debt"],
+    barmode="group",
+    title="Inflation vs Debt by Country"
+)
+
+st.plotly_chart(fig2)
