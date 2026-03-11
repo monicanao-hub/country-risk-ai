@@ -1,5 +1,6 @@
 import streamlit as st
 import pandas as pd
+import plotly.express as px
 from sklearn.ensemble import RandomForestClassifier
 
 data = {
@@ -100,3 +101,24 @@ st.table(ranking[["Country","Risk Level"]])
 st.subheader("📊 Economic Dashboard")
 
 st.bar_chart(countries.set_index("Country")[["inflation","debt"]])
+
+st.subheader("🌍 Global Country Risk Map")
+
+map_data = pd.DataFrame({
+"Country":["Chile","Peru","Brazil","Argentina","Mexico","Colombia"],
+"Risk Level":["Low Risk","Low Risk","Medium Risk","High Risk","Medium Risk","Medium Risk"]
+})
+
+risk_values = {"Low Risk":1,"Medium Risk":2,"High Risk":3}
+map_data["Risk Score"] = map_data["Risk Level"].map(risk_values)
+
+fig = px.choropleth(
+    map_data,
+    locations="Country",
+    locationmode="country names",
+    color="Risk Score",
+    color_continuous_scale="RdYlGn_r",
+    title="Global Risk Visualization"
+)
+
+st.plotly_chart(fig)
