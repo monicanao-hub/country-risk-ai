@@ -47,23 +47,6 @@ st.write("Low Risk → Stable macroeconomic conditions")
 st.write("Medium Risk → Moderate economic uncertainty")
 st.write("High Risk → High macroeconomic instability")
 
-st.subheader("Country Risk Ranking (Example)")
-
-countries = pd.DataFrame({
-"Country":["Chile","Peru","Brazil","Argentina"],
-"inflation":[4,3,6,140],
-"debt":[38,33,80,90],
-"gdp_growth":[2.5,2.8,1,-1],
-"unemployment":[8,6,9,7]
-})
-
-predictions = model.predict(countries[["inflation","debt","gdp_growth","unemployment"]])
-
-countries["Risk"] = [risk_levels[p] for p in predictions]
-
-
-st.dataframe(countries)
-
 st.subheader("Economic Indicators Visualization")
 
 chart_data = pd.DataFrame({
@@ -88,19 +71,6 @@ predictions = model.predict(countries[["inflation","debt","gdp_growth","unemploy
 countries["Risk Level"] = [risk_levels[p] for p in predictions]
 
 st.dataframe(countries)
-
-st.subheader("🏆 Countries Ranked by Risk")
-
-risk_order = {"Low Risk":1,"Medium Risk":2,"High Risk":3}
-countries["Risk Score"] = countries["Risk Level"].map(risk_order)
-
-ranking = countries.sort_values("Risk Score")
-
-st.table(ranking[["Country","Risk Level"]])
-
-st.subheader("📊 Economic Dashboard")
-
-st.bar_chart(countries.set_index("Country")[["inflation","debt"]])
 
 st.subheader("🌍 Global Country Risk Map")
 
@@ -149,3 +119,4 @@ The model analyzes macroeconomic indicators such as:
 
 Based on patterns learned from economic data, the algorithm predicts the **country investment risk level**.
 """)
+
